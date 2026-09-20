@@ -1,40 +1,33 @@
 import { useState } from 'react'
-import AttractionList from './components/AttractionList'
-import CategoryTabs from './components/CategoryTabs'
-import { attractions } from './data/attractions'
+import LuotXemDaiNoi from './features/landmarks/LuotXemDaiNoi'
 
 function App() {
-  const [selectedCategory, setSelectedCategory] =
-    useState('Tất cả')
-
-  const categories = [
-    'Tất cả',
-    ...new Set(
-      attractions.map((item) => item.category),
-    ),
-  ]
-
-  const filteredAttractions =
-    selectedCategory === 'Tất cả'
-      ? attractions
-      : attractions.filter(
-          (item) =>
-            item.category === selectedCategory,
-        )
+  const [hienThi, setHienThi] = useState(true)
 
   return (
-    <div className="app">
+    <div
+      style={{
+        maxWidth: '800px',
+        margin: '40px auto',
+        padding: '20px',
+        fontFamily: 'Arial, sans-serif',
+        textAlign: 'center',
+      }}
+    >
       <h1>Khám phá Huế</h1>
 
-      <CategoryTabs
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
-      />
+      <button
+        onClick={() => setHienThi(!hienThi)}
+        style={{
+          padding: '10px 20px',
+          marginBottom: '20px',
+          cursor: 'pointer',
+        }}
+      >
+        {hienThi ? 'Ẩn thẻ Đại Nội' : 'Hiện thẻ Đại Nội'}
+      </button>
 
-      <AttractionList
-        attractions={filteredAttractions}
-      />
+      {hienThi && <LuotXemDaiNoi />}
     </div>
   )
 }
