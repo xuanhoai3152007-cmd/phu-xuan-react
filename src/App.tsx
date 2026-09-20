@@ -1,4 +1,4 @@
-import TimMonAn from './features/food/TimMonAn'
+import DanhSachDiaDanh from './features/landmarks/DanhSachDiaDanh'
 
 function App() {
   return (
@@ -6,13 +6,10 @@ function App() {
       style={{
         maxWidth: '800px',
         margin: '0 auto',
-        padding: '40px',
         fontFamily: 'Arial, sans-serif',
       }}
     >
-      <h1>Thực hành Bài 6</h1>
-
-      <TimMonAn />
+      <DanhSachDiaDanh />
     </div>
   )
 }
