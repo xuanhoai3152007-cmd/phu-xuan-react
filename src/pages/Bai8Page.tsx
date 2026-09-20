@@ -1,5 +1,11 @@
 import '../styles/Bai8.css'
 import FormThemDiaDiem from '../features/dia-diem/FormThemDiaDiem'
+import FormGopY from '../features/gop-y/FormGopY'
+// ...
+<section className="lab">
+  <h2>Lab 4 — Form Góp ý (dùng lại hook useForm)</h2>
+  <FormGopY />
+</section>
 
 export default function Bai8Page() {
   return (

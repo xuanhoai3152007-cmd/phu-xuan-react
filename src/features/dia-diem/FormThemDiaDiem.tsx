@@ -1,4 +1,5 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useState, type ChangeEvent } from 'react'
+import { useForm } from '../../hooks/useForm'
 import { kiemChung, type DuLieuDiaDiem } from './kiemChung'
 
 const GIA_TRI_BAN_DAU: DuLieuDiaDiem = {
@@ -10,51 +11,39 @@ const GIA_TRI_BAN_DAU: DuLieuDiaDiem = {
   dongY: false,
 }
 
-// ... TienIch, DS_TIEN_ICH giữ nguyên như Lab 2 ...
+interface TienIch {
+  ma: string
+  ten: string
+}
+
+const DS_TIEN_ICH: TienIch[] = [
+  { ma: 'bai-xe', ten: 'Bãi đỗ xe' },
+  { ma: 'huong-dan', ten: 'Có hướng dẫn viên' },
+  { ma: 've-online', ten: 'Bán vé trực tuyến' },
+  { ma: 'khu-ve-sinh', ten: 'Khu vệ sinh công cộng' },
+]
 
 export default function FormThemDiaDiem() {
-  const [duLieu, setDuLieu] = useState<DuLieuDiaDiem>(GIA_TRI_BAN_DAU)
+  const { duLieu, dangGui, xuLyThayDoi, xuLyRoiO, loiCuaO, xuLyGui, datLai } = useForm(
+    GIA_TRI_BAN_DAU,
+    kiemChung
+  )
+
   const [tienIch, setTienIch] = useState<string[]>([])
-  const [daCham, setDaCham] = useState<Record<string, boolean>>({})
-  const [trangThai, setTrangThai] = useState<'cho' | 'dang-gui' | 'thanh-cong' | 'that-bai'>('cho')
 
-  // Lỗi là trạng thái dẫn xuất — tính lại mỗi lần kết xuất
-  const loi = kiemChung(duLieu)
-
-  function xuLyThayDoi(/* giữ nguyên như Lab 1–2 */) { /* ... */ }
-  function xuLyTich(/* giữ nguyên như Lab 2 */) { /* ... */ }
-
-  function xuLyRoiO(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-    const { name } = e.target
-    setDaCham((truoc) => ({ ...truoc, [name]: true }))
+  function xuLyTich(e: ChangeEvent<HTMLInputElement>) {
+    const { value, checked } = e.target
+    setTienIch((truoc) => (checked ? [...truoc, value] : truoc.filter((m) => m !== value)))
   }
 
-  function loiHienThi(ten: keyof DuLieuDiaDiem) {
-    return daCham[ten] ? loi[ten] : undefined
-  }
-
-  async function xuLyGui(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-
-    const tatCaDaCham: Record<string, boolean> = {}
-    Object.keys(GIA_TRI_BAN_DAU).forEach((k) => { tatCaDaCham[k] = true })
-    setDaCham(tatCaDaCham)
-
-    if (Object.keys(kiemChung(duLieu)).length > 0) return
-
-    try {
-      setTrangThai('dang-gui')
-      await new Promise((giai) => setTimeout(giai, 1200))
-      setTrangThai('thanh-cong')
-      setDuLieu(GIA_TRI_BAN_DAU)
-      setDaCham({})
-    } catch {
-      setTrangThai('that-bai')
-    }
-  }
+  const gui = xuLyGui(async (gt) => {
+    await new Promise((r) => setTimeout(r, 1200))
+    alert('Đã thêm: ' + gt.ten)
+    setTienIch([])
+  })
 
   return (
-    <form className="form-them-dia-diem" onSubmit={xuLyGui} noValidate>
+    <form className="form-them-dia-diem" onSubmit={gui} noValidate>
       <div className="truong">
         <label htmlFor="ten">Tên địa điểm</label>
         <input
@@ -64,35 +53,56 @@ export default function FormThemDiaDiem() {
           value={duLieu.ten}
           onChange={xuLyThayDoi}
           onBlur={xuLyRoiO}
-          aria-invalid={loiHienThi('ten') ? true : undefined}
+          aria-invalid={loiCuaO('ten') ? true : undefined}
           placeholder="Ví dụ: Lăng Minh Mạng"
         />
-        {loiHienThi('ten') && (
-          <p role="alert" className="thong-bao-loi">{loiHienThi('ten')}</p>
+        {loiCuaO('ten') && (
+          <p role="alert" className="thong-bao-loi">
+            {loiCuaO('ten')}
+          </p>
         )}
       </div>
 
-      {/* Mô tả giữ nguyên */}
+      <div className="truong">
+        <label htmlFor="moTa">Mô tả ngắn</label>
+        <textarea
+          id="moTa"
+          name="moTa"
+          rows={4}
+          value={duLieu.moTa}
+          onChange={xuLyThayDoi}
+          onBlur={xuLyRoiO}
+        />
+      </div>
 
       <div className="truong">
         <label htmlFor="giaVe">Giá vé (VNĐ)</label>
         <input
-          id="giaVe" name="giaVe" type="number"
-          value={duLieu.giaVe} onChange={xuLyThayDoi} onBlur={xuLyRoiO}
-          aria-invalid={loiHienThi('giaVe') ? true : undefined}
+          id="giaVe"
+          name="giaVe"
+          type="number"
+          value={duLieu.giaVe}
+          onChange={xuLyThayDoi}
+          onBlur={xuLyRoiO}
+          aria-invalid={loiCuaO('giaVe') ? true : undefined}
           placeholder="0"
         />
-        {loiHienThi('giaVe') && (
-          <p role="alert" className="thong-bao-loi">{loiHienThi('giaVe')}</p>
+        {loiCuaO('giaVe') && (
+          <p role="alert" className="thong-bao-loi">
+            {loiCuaO('giaVe')}
+          </p>
         )}
       </div>
 
       <div className="truong">
         <label htmlFor="phuong">Phường / xã</label>
         <select
-          id="phuong" name="phuong" value={duLieu.phuong}
-          onChange={xuLyThayDoi} onBlur={xuLyRoiO}
-          aria-invalid={loiHienThi('phuong') ? true : undefined}
+          id="phuong"
+          name="phuong"
+          value={duLieu.phuong}
+          onChange={xuLyThayDoi}
+          onBlur={xuLyRoiO}
+          aria-invalid={loiCuaO('phuong') ? true : undefined}
         >
           <option value="">-- Chọn phường --</option>
           <option value="phu-hau">Phú Hậu</option>
@@ -100,33 +110,67 @@ export default function FormThemDiaDiem() {
           <option value="thuy-bieu">Thuỷ Biều</option>
           <option value="vy-da">Vỹ Dạ</option>
         </select>
-        {loiHienThi('phuong') && (
-          <p role="alert" className="thong-bao-loi">{loiHienThi('phuong')}</p>
+        {loiCuaO('phuong') && (
+          <p role="alert" className="thong-bao-loi">
+            {loiCuaO('phuong')}
+          </p>
         )}
       </div>
 
-      {/* fieldset Loại hình, fieldset Tiện ích giữ nguyên như Lab 2 */}
+      <fieldset>
+        <legend>Loại hình</legend>
+        <label>
+          <input
+            name="loaiHinh"
+            type="radio"
+            value="di-tich"
+            checked={duLieu.loaiHinh === 'di-tich'}
+            onChange={xuLyThayDoi}
+          />
+          Di tích lịch sử
+        </label>
+        <label>
+          <input
+            name="loaiHinh"
+            type="radio"
+            value="am-thuc"
+            checked={duLieu.loaiHinh === 'am-thuc'}
+            onChange={xuLyThayDoi}
+          />
+          Điểm ẩm thực
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Tiện ích tại điểm đến</legend>
+        {DS_TIEN_ICH.map((ti) => (
+          <label key={ti.ma}>
+            <input
+              type="checkbox"
+              value={ti.ma}
+              checked={tienIch.includes(ti.ma)}
+              onChange={xuLyTich}
+            />
+            {ti.ten}
+          </label>
+        ))}
+      </fieldset>
 
       <label className="hop-kiem-dong-y">
         <input name="dongY" type="checkbox" checked={duLieu.dongY} onChange={xuLyThayDoi} />
         Tôi xác nhận thông tin địa điểm là chính xác
       </label>
-      {loiHienThi('dongY') && (
-        <p role="alert" className="thong-bao-loi">{loiHienThi('dongY')}</p>
-      )}
-
-      {trangThai === 'thanh-cong' && (
-        <p className="thong-bao-thanh-cong" role="status">Đã thêm địa điểm thành công!</p>
-      )}
-      {trangThai === 'that-bai' && (
-        <p className="thong-bao-loi" role="alert">Có lỗi khi gửi, vui lòng thử lại.</p>
+      {loiCuaO('dongY') && (
+        <p role="alert" className="thong-bao-loi">
+          {loiCuaO('dongY')}
+        </p>
       )}
 
       <div className="hang-nut">
-        <button type="submit" disabled={trangThai === 'dang-gui'}>
-          {trangThai === 'dang-gui' ? 'Đang lưu...' : 'Thêm địa điểm'}
+        <button type="submit" disabled={dangGui}>
+          {dangGui ? 'Đang lưu...' : 'Thêm địa điểm'}
         </button>
-        <button type="button" onClick={() => { setDuLieu(GIA_TRI_BAN_DAU); setDaCham({}) }}>
+        <button type="button" onClick={datLai}>
           Nhập lại
         </button>
       </div>
