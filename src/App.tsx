@@ -1,10 +1,18 @@
-const apiUrl = import.meta.env.VITE_API_BASE_URL
-const appTitle = import.meta.env.VITE_APP_TITLE
-const version = import.meta.env.VITE_APP_VERSION
+import { formatDate, toSlug } from './utils'
+import { APP_NAME } from './constants'
+import type { Post } from './types'
 
-const isDev = import.meta.env.DEV
-const isProd = import.meta.env.PROD
-const mode = import.meta.env.MODE
+const samplePost: Post = {
+  id: 1,
+  title: 'Giới thiệu React và hệ sinh thái hiện đại',
+  excerpt:
+    'Bài viết đầu tiên của phu-xuan-react giới thiệu các khái niệm cốt lõi.',
+  content:
+    'Nội dung đầy đủ sẽ được tải từ API...',
+  authorId: 1,
+  publishedAt: new Date().toISOString(),
+  tags: ['react', 'javascript', 'frontend'],
+}
 
 export default function App() {
   return (
@@ -12,66 +20,47 @@ export default function App() {
       style={{
         padding: '2rem',
         fontFamily: 'sans-serif',
+        maxWidth: '800px',
       }}
     >
-      <h1>
-        {appTitle} — v{version}
-      </h1>
+      <h1>{APP_NAME}</h1>
 
       <hr />
 
-      <h2>Thông tin môi trường</h2>
+      <article>
+        <h2>{samplePost.title}</h2>
 
-      <table
-        border={1}
-        cellPadding={8}
-      >
-        <tbody>
-          <tr>
-            <td>API URL</td>
-            <td>
-              <code>{apiUrl}</code>
-            </td>
-          </tr>
+        <p style={{ color: 'gray' }}>
+          Đăng ngày:{' '}
+          {formatDate(samplePost.publishedAt)}
+        </p>
 
-          <tr>
-            <td>Chế độ</td>
-            <td>
-              <code>{mode}</code>
-            </td>
-          </tr>
+        <p>{samplePost.excerpt}</p>
 
-          <tr>
-            <td>Đang phát triển?</td>
-            <td>
-              {isDev ? '✓ Có' : '✗ Không'}
-            </td>
-          </tr>
+        <p>
+          Slug URL:{' '}
+          <code>
+            /{toSlug(samplePost.title)}
+          </code>
+        </p>
 
-          <tr>
-            <td>Đang production?</td>
-            <td>
-              {isProd ? '✓ Có' : '✗ Không'}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <hr />
-
-      <h2>Kiểm tra bảo mật</h2>
-
-      <p>
-        DATABASE_URL (không có VITE_):{' '}
-        <code>
-          {String(import.meta.env.DATABASE_URL)}
-        </code>
-      </p>
-
-      <p style={{ color: 'green' }}>
-        Nếu thấy 'undefined' ở trên → Vite đã bảo vệ
-        biến bí mật đúng cách ✓
-      </p>
+        <div>
+          Tags:{' '}
+          {samplePost.tags.map((tag) => (
+            <span
+              key={tag}
+              style={{
+                marginRight: 8,
+                background: '#eee',
+                padding: '2px 8px',
+                borderRadius: 4,
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </article>
     </div>
   )
 }
