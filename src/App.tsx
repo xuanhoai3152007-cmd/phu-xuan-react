@@ -1,19 +1,19 @@
-import { APP_NAME } from './constants'
-import PostList from './features/posts/PostList'
-
-export default function App() {
+function App() {
   return (
-    <div
-      style={{
-        padding: '2rem',
-        fontFamily: 'sans-serif',
-        maxWidth: '800px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>{APP_NAME}</h1>
+    <>
+      <h1 style={{ color: 'teal', fontSize: 28 }}>
+        Phòng thí nghiệm JSX — phu-xuan-react
+      </h1>
 
-      <PostList />
-    </div>
+      <p>Buổi 4: Giới thiệu JSX</p>
+
+      <img
+        src="https://placehold.co/80x80"
+        className="avatar"
+        alt="Avatar"
+      />
+    </>
   )
 }
+
+export default App
