@@ -1,33 +1,18 @@
-import { useState } from 'react'
-import LuotXemDaiNoi from './features/landmarks/LuotXemDaiNoi'
+import TrangMonAn from './features/food/TrangMonAn'
 
 function App() {
-  const [hienThi, setHienThi] = useState(true)
-
   return (
     <div
       style={{
         maxWidth: '800px',
-        margin: '40px auto',
-        padding: '20px',
+        margin: '0 auto',
+        padding: '40px',
         fontFamily: 'Arial, sans-serif',
-        textAlign: 'center',
       }}
     >
-      <h1>Khám phá Huế</h1>
+      <h1>Thực hành Bài 6</h1>
 
-      <button
-        onClick={() => setHienThi(!hienThi)}
-        style={{
-          padding: '10px 20px',
-          marginBottom: '20px',
-          cursor: 'pointer',
-        }}
-      >
-        {hienThi ? 'Ẩn thẻ Đại Nội' : 'Hiện thẻ Đại Nội'}
-      </button>
-
-      {hienThi && <LuotXemDaiNoi />}
+      <TrangMonAn />
     </div>
   )
 }
