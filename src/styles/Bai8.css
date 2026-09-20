@@ -1,0 +1,138 @@
+:root {
+  --navy: #1b2a4a;
+  --teal: #0f6e6a;
+  --amber: #b8860b;
+  --vien: #c9d3de;
+  --do: #c0392b;
+  --xanh-la: #1e8449;
+}
+
+.trang-bai8 {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: system-ui, sans-serif;
+}
+.trang-bai8 h1 {
+  color: var(--navy);
+}
+.lab {
+  border: 1px solid var(--vien);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.lab h2 {
+  color: var(--teal);
+  margin-top: 0;
+}
+
+.form-them-dia-diem,
+.form-gop-y {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 480px;
+}
+
+.truong {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.truong label {
+  font-weight: 600;
+  color: var(--navy);
+}
+.truong input[type='text'],
+.truong input[type='number'],
+.truong textarea,
+.truong select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--vien);
+  font-family: inherit;
+  font-size: 14px;
+}
+.truong input[aria-invalid='true'],
+.truong select[aria-invalid='true'] {
+  border-color: var(--do);
+}
+
+fieldset {
+  border: 1px solid var(--vien);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+fieldset legend {
+  color: var(--teal);
+  font-weight: 600;
+  padding: 0 6px;
+}
+fieldset label {
+  display: block;
+  margin: 6px 0;
+  cursor: pointer;
+}
+
+.hop-kiem-dong-y {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.thong-bao-loi {
+  color: var(--do);
+  font-size: 13px;
+  margin: 0;
+}
+.thong-bao-thanh-cong {
+  color: var(--xanh-la);
+  font-weight: 600;
+}
+
+.hang-nut {
+  display: flex;
+  gap: 10px;
+}
+button {
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--vien);
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+}
+button[type='button'] {
+  background: #fff;
+  color: var(--navy);
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bo-cuc-hai-cot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .bo-cuc-hai-cot {
+    grid-template-columns: 1fr;
+  }
+}
+
+.the-xem-truoc {
+  border: 2px dashed var(--amber);
+  border-radius: 12px;
+  padding: 16px 20px;
+  background: #fbf4e4;
+}
+.the-xem-truoc h3 {
+  margin-top: 0;
+  color: var(--navy);
+}
