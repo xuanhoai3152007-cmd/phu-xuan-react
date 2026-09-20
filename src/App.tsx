@@ -1,4 +1,4 @@
-import TrangMonAn from './features/food/TrangMonAn'
+import TimMonAn from './features/food/TimMonAn'
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
     >
       <h1>Thực hành Bài 6</h1>
 
-      <TrangMonAn />
+      <TimMonAn />
     </div>
   )
 }
