@@ -1,38 +1,12 @@
-import DiaDiem1 from './components/DiaDiem1'
-import DiaDiem2 from './components/DiaDiem2'
-import DiaDiem3 from './components/DiaDiem3'
-
-import {
-  NhanTrangThai,
-  demTongSoDiaDiem,
-} from './components/TienIch'
+import AttractionList from './components/AttractionList'
+import { attractions } from './data/attractions'
 
 function App() {
-  const danhSachTen = [
-    'Đại Nội Huế',
-    'Chợ Đông Ba',
-    'Cầu Tràng Tiền',
-    
-  ]
-
-  const gioHienTaiLa8Gio = false
-
   return (
-    <div className="trang-chu">
-      <h1>Danh sách địa điểm — phu-xuan-react</h1>
+    <div className="app">
+      <h1>Khám phá Huế</h1>
 
-      <p>
-        Tổng số địa điểm:{' '}
-        {demTongSoDiaDiem(danhSachTen)}
-        {' — '}
-        <NhanTrangThai
-          dangMoCua={gioHienTaiLa8Gio}
-        />
-      </p>
-
-      <DiaDiem1 />
-      <DiaDiem2 />
-      <DiaDiem3 />
+      <AttractionList attractions={attractions} />
     </div>
   )
 }
