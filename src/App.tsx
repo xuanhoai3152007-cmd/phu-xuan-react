@@ -1,18 +1,34 @@
 function App() {
+  const hoTen = 'Lê Thị Hồng'
+  const maSinhVien = '22CNTT045'
+  const diemChuyenCan = 9
+  const diemBaiTap = 8
+  const diemKiemTra = 7.5
+  const daNopBaiTapVeNha = true
+
   return (
-    <>
-      <h1 style={{ color: 'teal', fontSize: 28 }}>
-        Phòng thí nghiệm JSX — phu-xuan-react
-      </h1>
+    <div className="student-card">
+      <h2>{hoTen}</h2>
 
-      <p>Buổi 4: Giới thiệu JSX</p>
+      <p>Mã số sinh viên: {maSinhVien}</p>
 
-      <img
-        src="https://placehold.co/80x80"
-        className="avatar"
-        alt="Avatar"
-      />
-    </>
+      <p>
+        Điểm quá trình:{' '}
+        {diemChuyenCan * 0.2 +
+          diemBaiTap * 0.4 +
+          diemKiemTra * 0.4}
+      </p>
+
+      <p
+        style={{
+          color: daNopBaiTapVeNha ? 'green' : 'crimson',
+        }}
+      >
+        {daNopBaiTapVeNha
+          ? 'Đã nộp bài tập về nhà Buổi 3.'
+          : 'Chưa nộp bài tập về nhà Buổi 3 — cần nộp trước Buổi 4!'}
+      </p>
+    </div>
   )
 }
 
