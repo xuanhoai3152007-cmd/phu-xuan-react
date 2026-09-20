@@ -1,15 +1,6 @@
 import { useState, type ChangeEvent } from 'react'
-import { useForm } from '../../hooks/useForm'
-import { kiemChung, type DuLieuDiaDiem } from './kiemChung'
-
-const GIA_TRI_BAN_DAU: DuLieuDiaDiem = {
-  ten: '',
-  moTa: '',
-  giaVe: '',
-  phuong: '',
-  loaiHinh: 'di-tich',
-  dongY: false,
-}
+import type { FormBundle } from '../../hooks/useForm'
+import type { DuLieuDiaDiem } from './kiemChung'
 
 interface TienIch {
   ma: string
@@ -23,12 +14,23 @@ const DS_TIEN_ICH: TienIch[] = [
   { ma: 'khu-ve-sinh', ten: 'Khu vệ sinh công cộng' },
 ]
 
-export default function FormThemDiaDiem() {
-  const { duLieu, dangGui, xuLyThayDoi, xuLyRoiO, loiCuaO, xuLyGui, datLai } = useForm(
-    GIA_TRI_BAN_DAU,
-    kiemChung
-  )
+// Chỉ lấy đúng những gì component con cần từ "bó" mà useForm trả về.
+// Đây là kiểu props sau khi nâng state lên thành phần cha (Lab 5).
+type FormThemDiaDiemProps = Pick<
+  FormBundle<DuLieuDiaDiem>,
+  'duLieu' | 'xuLyThayDoi' | 'xuLyRoiO' | 'loiCuaO' | 'xuLyGui' | 'dangGui'
+>
 
+export default function FormThemDiaDiem({
+  duLieu,
+  xuLyThayDoi,
+  xuLyRoiO,
+  loiCuaO,
+  xuLyGui,
+  dangGui,
+}: FormThemDiaDiemProps) {
+  // Tiện ích là danh sách nhiều lựa chọn, tách khỏi state đối tượng duLieu
+  // để không làm phức tạp handler chính (Lab 2).
   const [tienIch, setTienIch] = useState<string[]>([])
 
   function xuLyTich(e: ChangeEvent<HTMLInputElement>) {
@@ -37,8 +39,8 @@ export default function FormThemDiaDiem() {
   }
 
   const gui = xuLyGui(async (gt) => {
-    await new Promise((r) => setTimeout(r, 1200))
-    alert('Đã thêm: ' + gt.ten)
+    await new Promise((r) => setTimeout(r, 1200)) // giả lập gọi máy chủ
+    alert('Đã thêm: ' + gt.ten + ' — tiện ích: ' + (tienIch.join(', ') || '(không có)'))
     setTienIch([])
   })
 
@@ -84,8 +86,8 @@ export default function FormThemDiaDiem() {
           value={duLieu.giaVe}
           onChange={xuLyThayDoi}
           onBlur={xuLyRoiO}
-          aria-invalid={loiCuaO('giaVe') ? true : undefined}
           placeholder="0"
+          aria-invalid={loiCuaO('giaVe') ? true : undefined}
         />
         {loiCuaO('giaVe') && (
           <p role="alert" className="thong-bao-loi">
@@ -169,9 +171,6 @@ export default function FormThemDiaDiem() {
       <div className="hang-nut">
         <button type="submit" disabled={dangGui}>
           {dangGui ? 'Đang lưu...' : 'Thêm địa điểm'}
-        </button>
-        <button type="button" onClick={datLai}>
-          Nhập lại
         </button>
       </div>
     </form>
