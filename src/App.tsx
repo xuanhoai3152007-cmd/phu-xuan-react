@@ -1,17 +1,7 @@
-import DanhSachDiaDanh from './features/landmarks/DanhSachDiaDanh'
+import TimMonAnDebounce from './features/food/TimMonAnDebounce'
 
 function App() {
-  return (
-    <div
-      style={{
-        maxWidth: '800px',
-        margin: '0 auto',
-        fontFamily: 'Arial, sans-serif',
-      }}
-    >
-      <DanhSachDiaDanh />
-    </div>
-  )
+  return <TimMonAnDebounce />
 }
 
 export default App
