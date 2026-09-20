@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Attraction } from '../data/attractions'
 import StarRating from './StarRating'
+import TicketCounter from './TicketCounter'
 
 interface AttractionCardProps
   extends Omit<Attraction, 'id'> {}
@@ -41,6 +42,10 @@ function AttractionCard({
       <span className="attraction-card__rating">
         ⭐ {rating}
       </span>
+
+      {name === 'Đại Nội Huế' && (
+        <TicketCounter price={150000} />
+      )}
     </div>
   )
 }
