@@ -2,6 +2,7 @@ import BoCucTrang from '../components/BoCucTrang'
 import TheDiaDanh from '../components/TheDiaDanh'
 import HopThongBao, { HopThongBaoThanhCong } from '../components/HopThongBao'
 import DanhSach from '../components/DanhSach'
+import Nut from '../components/Nut'
 import { DANH_SACH_DIA_DANH } from '../du-lieu/diaDanh'
 import { DANH_SACH_MON_AN } from '../du-lieu/monAn'
 
@@ -51,10 +52,23 @@ function TrangDanhMuc() {
             cacMuc={DANH_SACH_MON_AN}
             hienThiMuc={(mon) => (
               <span>
-                {mon.ten} <button onClick={() => alert('Đã đặt: ' + mon.ten)}>Đặt món</button>
+                {mon.ten}{' '}
+                <Nut loai="phu" kichThuoc="nho" onClick={() => alert('Đã đặt: ' + mon.ten)}>
+                  Đặt món
+                </Nut>
               </span>
             )}
           />
+
+          <h2>Thành phần Nut tái sử dụng</h2>
+          <div className="hang-nut-demo">
+            <Nut loai="chinh" kichThuoc="lon" onClick={() => alert('Đã bấm nút chính!')}>
+              Khám phá ngay
+            </Nut>
+            <Nut loai="phu" kichThuoc="vua" onClick={() => alert('Đã bấm nút phụ!')}>
+              Xem thêm
+            </Nut>
+          </div>
         </>
       }
     />

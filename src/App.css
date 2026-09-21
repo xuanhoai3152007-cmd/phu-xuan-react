@@ -7,4 +7,11 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
+  margin-bottom: 16px;
+}
+.hang-nut-demo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
 }

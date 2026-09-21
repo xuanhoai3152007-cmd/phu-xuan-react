@@ -1,0 +1,36 @@
+.nut {
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.nut--chinh {
+  background: #0f6e6a;
+  color: #ffffff;
+  border-color: #0f6e6a;
+}
+.nut--chinh:hover {
+  background: #0c5b58;
+}
+.nut--phu {
+  background: #ffffff;
+  color: #0f6e6a;
+  border-color: #0f6e6a;
+}
+.nut--phu:hover {
+  background: #e6f0ef;
+}
+
+.nut--nho {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+.nut--vua {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+.nut--lon {
+  padding: 12px 22px;
+  font-size: 16px;
+}
