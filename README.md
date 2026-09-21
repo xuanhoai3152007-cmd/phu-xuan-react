@@ -1,21 +1,17 @@
-# phu-xuan-react
- 
-Dự án xuyên suốt học phần **Web FrontEnd nâng cao** (INT.7.18)
-Trường Đại học Phú Xuân — Khoa Công nghệ thông tin
- 
-## Cài đặt và chạy
- 
-```bash
-git clone https://github.com/<username>/phu-xuan-react.git
-cd phu-xuan-react
+# phu-xuan-react — Bài 9
+
+## Cài đặt & chạy
+
 npm install
 npm run dev
-```
- 
-Mở trình duyệt tại http://localhost:5173
- 
-## Công nghệ
- 
-- React 19 + TypeScript
-- Vite
-- ESLint + Prettier
+
+Mở http://localhost:5173
+
+## Thành phần đã xây dựng
+- TheDiaDanh — thẻ địa danh tái sử dụng qua props
+- The — khung có children
+- BoCucTrang — bố cục 3 khe JSX
+- HopThongBao / HopThongBaoThanhCong — kết hợp & chuyên biệt hóa
+
+## Ảnh chụp giao diện
+![giao dien](./anh-chup/trang-danh-muc.png)
