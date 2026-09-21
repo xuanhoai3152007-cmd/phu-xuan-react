@@ -1,0 +1,22 @@
+.danh-sach {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+.danh-sach li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e4e9ee;
+}
+.danh-sach li:last-child {
+  border-bottom: none;
+}
+.danh-sach button {
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd2d9;
+  background: #fff;
+}
