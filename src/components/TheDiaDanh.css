@@ -18,7 +18,20 @@
   color: #1b2a4a;
 }
 .the-dia-danh__mo-ta {
-  margin: 0;
+  margin: 0 0 10px;
   color: #52606d;
   font-size: 14px;
+}
+.the-dia-danh__nut {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #0f6e6a;
+  background: #ffffff;
+  color: #0f6e6a;
+  font-weight: 600;
+}
+.the-dia-danh__nut:hover {
+  background: #0f6e6a;
+  color: #ffffff;
 }
